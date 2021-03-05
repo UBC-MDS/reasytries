@@ -1,15 +1,27 @@
 Package: reasytries
-Title: What the Package Does (One Line, Title Case)
+Title: Python package that creates an easy trie data structure!
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+    c(person(given = "Rachel (Yuting)",
+             family = "Xu",
+             role = c("aut", "cre"),
+             email = "rachelxu.sauderfinance@gmail.com"),
+      person(given = "Kaicheng",
+             family = "Tan",
+             role = "aut",
+             email = "kctan20@student.ubc.ca"),
+      person(given = "Mitchie (Yiqi)",
+             family = "Zhao",
+             role = "aut",
+             email = "mitchie.zhao12@gmail.com"),
+      person(given = "Jordan",
+             family = "Lau",
+             role = "aut",
+             email = "Jordan_lauu@hotmail.com"))
+Description: The pyeasytries package contains classes and functions that 
+    efficiently store and search words passed by the user based on a trie data 
+    structure.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
