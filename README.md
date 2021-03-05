@@ -42,27 +42,24 @@ word insertion, deletion, and searching in the trie data structure.
 Users can pass any words to be stored for later-on searching or printing
 with certain prefix, and even modify the words in storage.
 
-## Features (TO BE MODIFIED BY Mitchie)
+## Features 
 
-  - `Class TrieNode`: creates a trie node.
-  - `Class Trie`: initializes a trie data structure with or without
-    adding any words.
+**Classes**
 
-Within `Class Trie`:
+  - `Class TrieNode`: conceptual class representation of a single node in a trie
+  - `Class Trie`: a conceptual class representation of a trie
+    
+**Functions**
 
-  - `contain(self, word)` function takes in a word and searches through
-    the trie structure to check if it has been stored in the trie
-    already.
+  - `trie_create()` function initializes an empty trie
+  
+  - `trie_add(trie, word_to_add)` function takes in a trie and a word_to_add to store each letter of the new word in the trie data structure.
+  
+  - `trie_contain(trie, word)` function takes in a trie and a word to search through the trie structure and check if the word has been stored in the trie already.
 
-  - `find_prefix(self, prefix)` function takes in a prefix string and
-    searches through the trie structure and returns a list of all words
-    stored with the given prefix.
+  - `trie_find_prefix(trie, prefix)` function takes in a trie and a prefix to search through the trie structure and return a list of all word stored with the given prefix.
 
-  - `add(self, word_to_add)` function takes in a word and stores each
-    letter of the new word in the trie data structure.
-
-  - `delete(self, word_to_delete)` function takes in a word and deletes
-    the letters of the word if they are contained in the trie already.
+  - `trie_delete(trie, word_to_delete)` function takes in a trie and a word_to_delete to remove the letters of the word if they are contained in the trie already. The function returns `FALSE` when the trie does not contain the word_to_delete.
 
 ## R Ecosystem (TO BE MODIFIED BY Jordan)
 
