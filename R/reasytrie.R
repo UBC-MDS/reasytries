@@ -43,3 +43,20 @@ trie_create <- function() {
 trie_delete <- function(trie, word_to_delete) {
   stop("The function is not yet implemented")
 }
+
+#' Search if a word is present in the trie.
+#'
+#' @param trie A trie.
+#' @param word The word to be searched in the trie.
+#'
+#' @return a logical indicating that if the word is present or not.
+#'   Returns TRUE if the word is in the trie.
+#'   Returns FALSE if the word is not in the trie.
+#' @export
+#'
+#' @examples
+#' trie <- trie_create()
+#' trie_contain(trie, "test")
+trie_contain <- function(trie, word) {
+  stop("The function is not yet implemented")
+}
