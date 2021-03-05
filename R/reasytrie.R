@@ -62,13 +62,13 @@ trie_contain <- function(trie, word) {
 }
 
 
-#' Adds a single word to the trie. 
+#' Adds a single word to the trie.
 #'
 #' @param trie A trie.
 #' @param word_to_add The word to be added in the trie.
 #'
 #' @return a logical indicating that if the addition is successful or not.
-#'   Returns TRUE if word is added successfully 
+#'   Returns TRUE if word is added successfully
 #'   Returns FALSE if the word  already exists in the trie.
 #' @export
 #'
@@ -76,5 +76,21 @@ trie_contain <- function(trie, word) {
 #' trie <- trie_create()
 #' trie_add(trie, "test")
 trie_add <- function(trie, word_to_add) {
+  stop("The function is not yet implemented")
+}
+
+
+#' Finds all words that match the prefix in the trie.
+#'
+#' @param trie A trie.
+#' @param prefix The prefix of the words to search for.
+#'
+#' @return List of words matching the prefix
+#' @export
+#'
+#' @examples
+#' trie <- trie_create()
+#' trie_find_prefix(trie, "he")
+trie_find_prefix <- function(trie, prefix) {
   stop("The function is not yet implemented")
 }
