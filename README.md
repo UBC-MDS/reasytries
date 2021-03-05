@@ -7,7 +7,7 @@
 
 <!-- badges: end -->
 
-The pyeasytries package contains classes and functions that efficiently
+The reasytries package contains classes and functions that efficiently
 store and search words passed by the user based on a trie data
 structure.
 
@@ -73,7 +73,7 @@ with certain prefix, and even modify the words in storage.
 
 ## R Ecosystem
 
-This `pyeasytries` package aims to simplify and speed up the process of
+This `reasytries` package aims to simplify and speed up the process of
 searching through a fixed dictionary. In addition to time complexity
 benefits, a tries data structure also allows to search for given words
 inside the fixed dictionary when given a prefix. Users who are building

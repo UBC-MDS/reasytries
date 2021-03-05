@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The pyeasytries package contains classes and functions that efficiently store and search words passed by the user based on a trie data structure.
+The reasytries package contains classes and functions that efficiently store and search words passed by the user based on a trie data structure.
 
 This package was developed as a project for UBC MDS-Vancouver program DSCI 524 course.
 
@@ -68,4 +68,4 @@ with certain prefix, and even modify the words in storage.
   - `trie_delete(trie, word_to_delete)` function takes in a trie and a word_to_delete to remove the letters of the word if they are contained in the trie already. The function returns `FALSE` when the trie does not contain the word_to_delete.
 
 ## R Ecosystem
-This `pyeasytries` package aims to simplify and speed up the process of searching through a fixed dictionary. In addition to time complexity benefits, a tries data structure also allows to search for given words inside the fixed dictionary when given a prefix. Users who are building a search/filter bar from a fixed dictionary will find this package useful! As trie is a famous data structure, there are currently some simple trie packages in R such as  [trie](https://www.rdocumentation.org/packages/triebeard/versions/0.3.0/topics/trie). 
+This `reasytries` package aims to simplify and speed up the process of searching through a fixed dictionary. In addition to time complexity benefits, a tries data structure also allows to search for given words inside the fixed dictionary when given a prefix. Users who are building a search/filter bar from a fixed dictionary will find this package useful! As trie is a famous data structure, there are currently some simple trie packages in R such as  [trie](https://www.rdocumentation.org/packages/triebeard/versions/0.3.0/topics/trie). 
