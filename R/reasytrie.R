@@ -60,3 +60,21 @@ trie_delete <- function(trie, word_to_delete) {
 trie_contain <- function(trie, word) {
   stop("The function is not yet implemented")
 }
+
+
+#' Adds a single word to the trie. 
+#'
+#' @param trie A trie.
+#' @param word_to_add The word to be added in the trie.
+#'
+#' @return a logical indicating that if the addition is successful or not.
+#'   Returns TRUE if word is added successfully 
+#'   Returns FALSE if the word  already exists in the trie.
+#' @export
+#'
+#' @examples
+#' trie <- trie_create()
+#' trie_add(trie, "test")
+trie_add <- function(trie, word_to_add) {
+  stop("The function is not yet implemented")
+}
