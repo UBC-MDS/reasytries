@@ -42,26 +42,36 @@ word insertion, deletion, and searching in the trie data structure.
 Users can pass any words to be stored for later-on searching or printing
 with certain prefix, and even modify the words in storage.
 
-## Features 
+## Features
 
 **Classes**
 
-  - `Class TrieNode`: conceptual class representation of a single node in a trie
+  - `Class TrieNode`: conceptual class representation of a single node
+    in a trie
   - `Class Trie`: a conceptual class representation of a trie
-    
+
 **Functions**
 
   - `trie_create()` function initializes an empty trie
-  
-  - `trie_add(trie, word_to_add)` function takes in a trie and a word_to_add to store each letter of the new word in the trie data structure.
-  
-  - `trie_contain(trie, word)` function takes in a trie and a word to search through the trie structure and check if the word has been stored in the trie already.
 
-  - `trie_find_prefix(trie, prefix)` function takes in a trie and a prefix to search through the trie structure and return a list of all word stored with the given prefix.
+  - `trie_add(trie, word_to_add)` function takes in a trie and a
+    word\_to\_add to store each letter of the new word in the trie data
+    structure.
 
-  - `trie_delete(trie, word_to_delete)` function takes in a trie and a word_to_delete to remove the letters of the word if they are contained in the trie already. The function returns `FALSE` when the trie does not contain the word_to_delete.
+  - `trie_contain(trie, word)` function takes in a trie and a word to
+    search through the trie structure and check if the word has been
+    stored in the trie already.
 
-## R Ecosystem (TO BE MODIFIED BY Jordan)
+  - `trie_find_prefix(trie, prefix)` function takes in a trie and a
+    prefix to search through the trie structure and return a list of all
+    word stored with the given prefix.
+
+  - `trie_delete(trie, word_to_delete)` function takes in a trie and a
+    word\_to\_delete to remove the letters of the word if they are
+    contained in the trie already. The function returns `FALSE` when the
+    trie does not contain the word\_to\_delete.
+
+## R Ecosystem
 
 This `pyeasytries` package aims to simplify and speed up the process of
 searching through a fixed dictionary. In addition to time complexity
@@ -69,5 +79,5 @@ benefits, a tries data structure also allows to search for given words
 inside the fixed dictionary when given a prefix. Users who are building
 a search/filter bar from a fixed dictionary will find this package
 useful\! As trie is a famous data structure, there are currently some
-similar packages in Python such as
-[pygtrie](https://pypi.org/project/pygtrie/).
+simple trie packages in R such as
+[trie](https://www.rdocumentation.org/packages/triebeard/versions/0.3.0/topics/trie).
