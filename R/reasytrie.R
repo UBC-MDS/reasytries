@@ -6,7 +6,8 @@
 #' @name trie.node
 #' @rdname trie.node
 #' @export
-setClass("trie.node", slots=list(is_complete_word="logical", children="environment"))
+setClass("trie.node",
+         slots = list(is_complete_word = "logical", children = "environment"))
 
 #' This is a conceptual class representation of a Trie.
 #'
@@ -15,7 +16,7 @@ setClass("trie.node", slots=list(is_complete_word="logical", children="environme
 #' @name trie
 #' @rdname trie
 #' @export
-setClass("trie", slots=list(root="trie.node"))
+setClass("trie", slots = list(root = "trie.node"))
 
 #' Create an empty trie.
 #'
@@ -25,7 +26,43 @@ setClass("trie", slots=list(root="trie.node"))
 #' @examples
 #' trie <- trie_create()
 trie_create <- function() {
-  new("trie", root = new("trie.node", is_complete_word=FALSE, children=new.env()))
+  new("trie",
+      root = new(
+        "trie.node",
+        is_complete_word = FALSE,
+        children = rlang::new_environment())
+  )
+}
+
+.trie_delete <- function(cur, word_to_delete) {
+  if (!exists(substr(word_to_delete, 1, 1), envir = cur@children)) {
+    return(FALSE)
+  }
+
+  if (nchar(word_to_delete) == 1) {
+    if (!cur@children[[word_to_delete]]@is_complete_word) {
+      return(FALSE)
+    }
+
+    cur@children[[word_to_delete]]@is_complete_word <- FALSE
+    if (length(cur@children[[word_to_delete]]@children) == 0) {
+      rm(list = word_to_delete, envir = cur@children)
+    }
+
+    return(TRUE)
+  }
+
+  result <-
+    .trie_delete(cur@children[[substr(word_to_delete, 1, 1)]],
+                 substr(word_to_delete, 2, nchar(word_to_delete)))
+
+  if (length(cur@children[[substr(word_to_delete, 1, 1)]]@children) == 0 &&
+      (!(cur@children[[substr(word_to_delete, 1, 1)]]@is_complete_word))) {
+    rm(list = substr(word_to_delete, 1, 1),
+       envir = cur@children)
+  }
+
+  result
 }
 
 #' Deletes a single word from the trie.
@@ -41,7 +78,15 @@ trie_create <- function() {
 #' trie <- trie_create()
 #' trie_delete(trie, "test")
 trie_delete <- function(trie, word_to_delete) {
-  stop("The function is not yet implemented")
+  if (!class(trie) == "trie") {
+    stop("trie must be an instance of the trie class")
+  }
+
+  if (!is.character(word_to_delete) || nchar(word_to_delete) < 1) {
+    stop("word_to_delete must be a non-empty string")
+  }
+
+  .trie_delete(trie@root, word_to_delete)
 }
 
 #' Search if a word is present in the trie.
