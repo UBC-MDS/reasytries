@@ -26,53 +26,43 @@ setClass("trie", slots = list(root = "trie.node"))
 #' @examples
 #' trie <- trie_create()
 trie_create <- function() {
-  new(
-    "trie",
-    root = new(
-      "trie.node",
-      is_complete_word = FALSE,
-      children = rlang::new_environment()
-    )
+  new("trie",
+      root = new(
+        "trie.node",
+        is_complete_word = FALSE,
+        children = rlang::new_environment())
   )
 }
 
 .trie_delete <- function(cur, word_to_delete) {
-  # print(word_to_delete)
-  if (word_to_delete == "") {
-    if (cur@is_complete_word) {
-      cur@is_complete_word <- FALSE
-      if (length(cur@children) == 0) {
-        return(list(delete_success = TRUE, remove_link = TRUE))
-      } else {
-        return(list(delete_success = TRUE, remove_link = FALSE))
-      }
-    } else {
-      return(list(delete_success = FALSE, remove_link = FALSE))
-    }
+  if (!exists(substr(word_to_delete, 1, 1), envir = cur@children)) {
+    return(FALSE)
   }
 
-  if (!exists(substr(word_to_delete, 1, 1), envir = cur@children)) {
-    return(list(delete_success = FALSE, remove_link = FALSE))
+  if (nchar(word_to_delete) == 1) {
+    if (!cur@children[[word_to_delete]]@is_complete_word) {
+      return(FALSE)
+    }
+
+    cur@children[[word_to_delete]]@is_complete_word <- FALSE
+    if (length(cur@children[[word_to_delete]]@children) == 0) {
+      rm(list = word_to_delete, envir = cur@children)
+    }
+
+    return(TRUE)
   }
 
   result <-
     .trie_delete(cur@children[[substr(word_to_delete, 1, 1)]],
                  substr(word_to_delete, 2, nchar(word_to_delete)))
 
-  if (!result$delete_success) {
-    return(list(delete_success = FALSE, remove_link = FALSE))
-  }
-
-  if (result$remove_link) {
+  if (length(cur@children[[substr(word_to_delete, 1, 1)]]@children) == 0 &&
+      (!(cur@children[[substr(word_to_delete, 1, 1)]]@is_complete_word))) {
     rm(list = substr(word_to_delete, 1, 1),
        envir = cur@children)
   }
 
-  if (length(cur@children) == 0 && (!cur@is_complete_word)) {
-    return(list(delete_success = TRUE, remove_link = TRUE))
-  }
-
-  list(delete_success = TRUE, remove_link = FALSE)
+  result
 }
 
 #' Deletes a single word from the trie.
@@ -92,13 +82,11 @@ trie_delete <- function(trie, word_to_delete) {
     stop("trie must be an instance of the trie class")
   }
 
-  if (!is.character(word_to_delete) || length(word_to_delete) < 1) {
+  if (!is.character(word_to_delete) || nchar(word_to_delete) < 1) {
     stop("word_to_delete must be a non-empty string")
   }
 
-  result = .trie_delete(trie@root, word_to_delete)
-
-  result$delete_success
+  .trie_delete(trie@root, word_to_delete)
 }
 
 #' Search if a word is present in the trie.
