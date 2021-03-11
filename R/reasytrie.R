@@ -111,9 +111,29 @@ trie_delete <- function(trie, word_to_delete) {
 #' trie <- trie_create()
 #' trie_contain(trie, "test")
 trie_contain <- function(trie, word) {
-  stop("The function is not yet implemented")
-}
+  if (!class(trie) == "trie") {
+    stop("Input trie must be an instance of the trie class")
+  }
 
+  if (!is.character(word) || !grepl("^[A-Za-z]+$", word)) {
+    stop("Input word must be a valid string contains letters only")
+  }
+
+  char_list <- as.list((strsplit(tolower(word), "")[[1]]))
+  cur <- trie@root
+
+  for (char in char_list) {
+    if (!exists(char, envir = cur@children)) {
+      return(FALSE)
+    }
+
+    cur <- cur@children[[char]]
+  }
+
+  if (!cur@is_complete_word) {
+    return(FALSE)
+  } else {return(TRUE)}
+}
 
 #' Adds a single word to the trie.
 #'
