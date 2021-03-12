@@ -149,7 +149,46 @@ trie_contain <- function(trie, word) {
 #' trie <- trie_create()
 #' trie_add(trie, "test")
 trie_add <- function(trie, word_to_add) {
-  stop("The function is not yet implemented")
+
+  if (!class(trie) == "trie") {
+    stop("Input trie must be an instance of the trie class")
+  }
+
+  if (!is.character(word_to_add) || !grepl("^[A-Za-z]+$", word_to_add)) {
+    stop("Input word must be a valid string contains letters only")
+  }
+
+  char_list <-  as.list(strsplit(word_to_add, "")[[1]])
+  cur <- trie@root
+
+  for (i in seq_along(char_list)) {
+    char <- char_list[[i]]
+
+
+    if (exists(char, envir = cur@children)) {
+      if (i == length(char_list)) {
+        cur@children[[char]] <- TRUE
+      }
+      cur <- cur@children[[char]]
+    }
+
+    else {
+
+      if (i == length(char_list)) {
+        is_complete_word <- TRUE
+      } else {is_complete_word <- FALSE}
+
+      cur@children[[char]] <- new("trie.node", is_complete_word = is_complete_word, children = rlang::new_environment())
+      cur <- cur@children[[char]]
+    }
+
+  }
+
+  if (!cur@is_complete_word) {
+    return(FALSE)
+  } else {
+    return(TRUE)
+  }
 }
 
 
