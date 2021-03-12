@@ -30,6 +30,13 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("UBC-MDS/reasytries")
 ```
 
+## Dependencies
+
+[R 4.0.2](https://www.r-project.org/)
+
+[rlang 0.4.10](https://cran.r-project.org/web/packages/rlang/index.html)
+
+
 ## Overview
 
 Storing and searching words can be expensive in terms of time and
