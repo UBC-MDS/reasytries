@@ -48,6 +48,12 @@ word insertion, deletion, and searching in the trie data structure.
 Users can pass any words to be stored for later-on searching or printing
 with certain prefix, and even modify the words in storage.
 
+## Dependencies
+
+[R 4.0.2](https://www.r-project.org/)
+
+[rlang 0.4.10](https://cran.r-project.org/web/packages/rlang/index.html)
+
 ## Features 
 
 **Classes**

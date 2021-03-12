@@ -35,31 +35,39 @@ trie_create <- function() {
 }
 
 .trie_delete <- function(cur, word_to_delete) {
-  if (!exists(substr(word_to_delete, 1, 1), envir = cur@children)) {
+  # The next character to process
+  next_char <- substr(word_to_delete, 1, 1)
+  # Rest of the strings excluding the next character
+  rest_string <- substr(word_to_delete, 2, nchar(word_to_delete))
+
+  if (!exists(next_char, envir = cur@children)) {
+    # The next character is not in the Trie, deletion failed.
     return(FALSE)
   }
 
   if (nchar(word_to_delete) == 1) {
+    # Reached the target node correspond to the last character
     if (!cur@children[[word_to_delete]]@is_complete_word) {
+      # The path to this node does not form a complete word, deletion failed.
       return(FALSE)
     }
 
     cur@children[[word_to_delete]]@is_complete_word <- FALSE
     if (length(cur@children[[word_to_delete]]@children) == 0) {
+      # This node does not have any child, so we want to remove it from
+      #   our Trie entirely.
       rm(list = word_to_delete, envir = cur@children)
     }
 
     return(TRUE)
   }
 
-  result <-
-    .trie_delete(cur@children[[substr(word_to_delete, 1, 1)]],
-                 substr(word_to_delete, 2, nchar(word_to_delete)))
+  result <- .trie_delete(cur@children[[next_char]], rest_string)
 
-  if (length(cur@children[[substr(word_to_delete, 1, 1)]]@children) == 0 &&
-      (!(cur@children[[substr(word_to_delete, 1, 1)]]@is_complete_word))) {
-    rm(list = substr(word_to_delete, 1, 1),
-       envir = cur@children)
+  if (length(cur@children[[next_char]]@children) == 0 &&
+      (!(cur@children[[next_char]]@is_complete_word))) {
+    # The node is not a complete word while not having any child, remove it.
+    rm(list = next_char, envir = cur@children)
   }
 
   result
@@ -103,9 +111,29 @@ trie_delete <- function(trie, word_to_delete) {
 #' trie <- trie_create()
 #' trie_contain(trie, "test")
 trie_contain <- function(trie, word) {
-  stop("The function is not yet implemented")
-}
+  if (!class(trie) == "trie") {
+    stop("Input trie must be an instance of the trie class")
+  }
 
+  if (!is.character(word) || !grepl("^[A-Za-z]+$", word)) {
+    stop("Input word must be a valid string contains letters only")
+  }
+
+  char_list <- as.list((strsplit(tolower(word), "")[[1]]))
+  cur <- trie@root
+
+  for (char in char_list) {
+    if (!exists(char, envir = cur@children)) {
+      return(FALSE)
+    }
+
+    cur <- cur@children[[char]]
+  }
+
+  if (!cur@is_complete_word) {
+    return(FALSE)
+  } else {return(TRUE)}
+}
 
 #' Adds a single word to the trie.
 #'
