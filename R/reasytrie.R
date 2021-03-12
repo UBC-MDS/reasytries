@@ -157,6 +157,14 @@ trie_add <- function(trie, word_to_add) {
 #' trie <- trie_create()
 #' trie_find_prefix(trie, "be")
 trie_find_prefix <- function(trie, prefix) {
+  if (!class(trie) == "trie") {
+    stop("trie must be an instance of the trie class")
+  }
+
+  if (!is.character(prefix) || nchar(prefix) < 1) {
+    stop("prefix must be a non-empty string")
+  }
+
   # currently at root
   cur <- trie@root
   for (char in strsplit(prefix, "")[[1]]) {
