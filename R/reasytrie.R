@@ -125,6 +125,26 @@ trie_add <- function(trie, word_to_add) {
 }
 
 
+#' Private helper function for trie_find_prefix.
+#' Cycles through all children of last prefix character node recursively,
+#' adding all complete words to results.
+.trie_find_prefix <- function(node, prefix) {
+  if (node@is_complete_word == TRUE) {
+    results <- prefix
+  }
+  else {
+    results <- vector(mode = "character")
+  }
+  if (length(node@children) == 0) {
+    return(results)
+  }
+  for (key in ls(node@children)) {
+    results <- append(results,
+                      .trie_find_prefix(node@children[[key]], paste(prefix, key, sep="")))
+  }
+  results
+}
+
 #' Finds all words that match the prefix in the trie.
 #'
 #' @param trie A trie.
@@ -135,7 +155,16 @@ trie_add <- function(trie, word_to_add) {
 #'
 #' @examples
 #' trie <- trie_create()
-#' trie_find_prefix(trie, "he")
+#' trie_find_prefix(trie, "be")
 trie_find_prefix <- function(trie, prefix) {
-  stop("The function is not yet implemented")
+  # currently at root
+  cur <- trie@root
+  for (char in strsplit(prefix, "")[[1]]) {
+    if (!exists(char, cur@children)) {
+      return(vector(mode = "character"))
+    }
+    cur <- cur@children[[char]]
+  }
+  # Step 2: use helper function .trie_find_prefix
+  .trie_find_prefix(cur, prefix)
 }
