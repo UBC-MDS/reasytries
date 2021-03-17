@@ -44,6 +44,10 @@ with certain prefix, and even modify the words in storage.
 
 ## Features
 
+**Classes**
+
+  - `Class Trie`: Conceptual class representation of a trie
+
 **Functions**
 
   - `trie_create()` function initializes an empty trie

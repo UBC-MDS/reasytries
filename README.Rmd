@@ -49,6 +49,10 @@ with certain prefix, and even modify the words in storage.
 [rlang 0.4.10](https://cran.r-project.org/web/packages/rlang/index.html)
 
 ## Features 
+
+**Classes**
+
+  - `Class Trie`: Conceptual class representation of a trie
     
 **Functions**
 
