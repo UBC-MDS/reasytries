@@ -5,7 +5,9 @@
 \alias{trie}
 \title{Conceptual class representation of a Trie.}
 \description{
-Conceptual class representation of a Trie.
+Package users should NEVER initialize or access attributes of this class
+directly. Instead, use \code{trie_create()} for initialization and the rest
+of the public functions for modification.
 }
 \section{Slots}{
 
