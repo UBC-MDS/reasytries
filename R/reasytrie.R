@@ -5,7 +5,6 @@
 #'
 #' @name trie.node
 #' @rdname trie.node
-#' @export
 setClass("trie.node",
          slots = list(is_complete_word = "logical", children = "environment"))
 
@@ -15,7 +14,6 @@ setClass("trie.node",
 #'
 #' @name trie
 #' @rdname trie
-#' @export
 setClass("trie", slots = list(root = "trie.node"))
 
 #' Create an empty trie.
