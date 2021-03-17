@@ -58,14 +58,19 @@ search suggestion system, the dictionary will be all the possible suggestion.
 ## Create a trie
 
 The first step of using a trie is to build it with your dictionary. To do so,
-first you need to call `trie_create()` to initial an empty trie:
+first you need to call `trie_create()` to initialize an empty trie:
 
 ```{r}
 trie <- trie_create()
 ```
 
-Next, you want to add all of your words in dictionary into the trie by calling
-`trie_add()` for each of your word:
+<mark>
+Pay special attention that: the trie created here is a **mutable** structure.
+All operations mentioned below modifies the trie in place.
+</mark>
+
+Next, you want to add all of your words in yout dictionary into the trie by
+calling `trie_add()` for each of the words:
 
 ```{r}
 for (fruit_name in fruit_names_dictionary) {
@@ -79,7 +84,8 @@ The most common use case for a trie is to check if a word is in a trie or what
 words start with a prefix. This is implemented in the package as functions
 `trie_contain()` and `trie_find_prefix()`.
 
-If we would like to check if a word is in a trie, we can use `trie_contain()`
+If you would like to check if a word is in a trie, you can use `trie_contain()`.
+`trie_contain()` returns a logical value indicating if a word is in a trie,
 like below:
 
 ```{r}
@@ -90,19 +96,23 @@ trie_contain(trie, "banana")
 trie_contain(trie, "durian")
 ```
 
-`trie_contain()` returns a logical value inidicating if a word is in a trie.
-
-If you would like to get all words starts with a prefixm you can use
+If you would like to get all words starts with a prefix, you can use
 `trie_find_prefix()`:
 
 ```{r}
 # find all words starts with "ap"
 trie_find_prefix(trie, "ap")
+
+# find all words starts with "m"
+trie_find_prefix(trie, "m")
+
+# find all words starts with "dur" (should be empty)
+trie_find_prefix(trie, "dur")
 ```
 
 ## Delete words in a trie
 
-After the creation of a trie, sometime you might like to remove a word from
+After the creation of a trie, sometimes you might want to remove a word from
 the trie if it is no longer valid in your context. You can achieve so with
 `trie_delete()`:
 
@@ -111,7 +121,8 @@ the trie if it is no longer valid in your context. You can achieve so with
 #   this point
 trie_contain(trie, "apple")
 
-# Now, let's remove "apple" from our trie
+# Now, let's remove "apple" from our trie.
+# Should return true indicating deletion success.
 trie_delete(trie, "apple")
 
 # Now, trie_contain should return FALSE as "apple" has been removed.
@@ -121,3 +132,9 @@ trie_contain(trie, "apple")
 trie_find_prefix(trie, "ap")
 ```
 
+On the other hand, deletion will fail if you are trying to remove a word not in
+the trie:
+```{r}
+# Should return FALSE indicating deletion failure.
+trie_delete(trie, "durian")
+```
