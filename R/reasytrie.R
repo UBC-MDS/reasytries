@@ -1,14 +1,22 @@
-#' This is a conceptual class representation of a single node in a trie.
+#' Conceptual class representation of a single node in a trie.
+#'
+#' This is an implementation detail that should NOT be exposed to the package users.
 #'
 #' @slot is_complete_word A logical marks if the path to this node forms a complete word.
 #' @slot children An environment (hash map) that maps from the next alphabet to the corresponding sub-tree.
 #'
 #' @name trie.node
 #' @rdname trie.node
+#' @noRd
+#' @keywords internal
 setClass("trie.node",
          slots = list(is_complete_word = "logical", children = "environment"))
 
-#' This is a conceptual class representation of a Trie.
+#' Conceptual class representation of a Trie.
+#'
+#' Package users should NEVER initialize or access attributes of this class
+#'   directly. Instead, use `trie_create()` for initialization and the rest
+#'   of the public functions for modification.
 #'
 #' @slot root A trie node that is the root of the trie.
 #'
@@ -73,7 +81,7 @@ trie_create <- function() {
 
 #' Deletes a single word from the trie.
 #'
-#' @param trie A trie.
+#' @param trie A `trie`.
 #' @param word_to_delete The word to be deleted from the trie.
 #'
 #' @return a logical indicating that if the deletion is successful or not.
@@ -97,7 +105,7 @@ trie_delete <- function(trie, word_to_delete) {
 
 #' Search if a word is present in the trie.
 #'
-#' @param trie A trie.
+#' @param trie A `trie`.
 #' @param word The word to be searched in the trie.
 #'
 #' @return a logical indicating that if the word is present or not.
@@ -135,7 +143,7 @@ trie_contain <- function(trie, word) {
 
 #' Adds a single word to the trie.
 #'
-#' @param trie A trie.
+#' @param trie A `trie`.
 #' @param word_to_add The word to be added in the trie.
 #'
 #' @return a logical indicating that if the addition is successful or not.
@@ -193,6 +201,8 @@ trie_add <- function(trie, word_to_add) {
 #' Private helper function for trie_find_prefix.
 #' Cycles through all children of last prefix character node recursively,
 #' adding all complete words to results.
+#' @noRd
+#' @keywords internal
 .trie_find_prefix <- function(node, prefix) {
   if (node@is_complete_word == TRUE) {
     results <- prefix
@@ -212,7 +222,7 @@ trie_add <- function(trie, word_to_add) {
 
 #' Finds all words that match the prefix in the trie.
 #'
-#' @param trie A trie.
+#' @param trie A `trie`.
 #' @param prefix The prefix of the words to search for.
 #'
 #' @return List of words matching the prefix

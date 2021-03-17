@@ -5,7 +5,7 @@ description: >
   Start here if this is your first time using reasytrie. This document gives you
   a comprehensive introduction all the APIs available in the package.
 vignette: >
-  %\VignetteIndexEntry{reasytries}
+  %\VignetteIndexEntry{Introduction to reasytries}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
