@@ -1,0 +1,140 @@
+---
+title: "Introduction to reasytries"
+output: rmarkdown::html_vignette
+description: >
+  Start here if this is your first time using reasytrie. This document gives you
+  a comprehensive introduction all the APIs available in the package.
+vignette: >
+  %\VignetteIndexEntry{Introduction to reasytries}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+To use `reasytrie`, load the library like below:
+
+```{r setup}
+library(reasytries)
+```
+
+At a high level, `reasytrie` implements a trie (aka. prefix tree) data structure
+that allows you to search for a word in a dictionary. The time complexity for
+the search is $O(m)$, where $m$ is the length of the word to search.
+
+The package provides you the following 4 operations you can do with a trie:
+
+* Word insertion
+* Word deletion
+* Word complete search
+* Word prefix search
+
+This document introduces you to all the operations listed above, by giving you
+a complete example involving all these operations.
+
+## Data
+
+For demonstration purposes, we will start with a (incomplete) list of fruit
+names from scratch:
+
+```{r}
+fruit_names_dictionary = list(
+  "apple", "apricot", "avocado", "banana", "berry", "cantaloupe", "cherry", 
+  "citron", "citrus", "coconut", "grape", "guava", "kiwi", "lemon", "lime",
+  "mango", "melon", "mulberry", "nectarine", "orange", "papaya", "peach",
+  "pear", "pineapple", "plum", "prune", "raisin", "raspberry", "tangerine"
+)
+```
+
+Note that we'll refer to this list of names as "dictionary". This is a list you
+will define based on your use case. For example, if your are building a word
+search suggestion system, the dictionary will be all the possible suggestion.
+
+## Create a trie
+
+The first step of using a trie is to build it with your dictionary. To do so,
+first you need to call `trie_create()` to initialize an empty trie:
+
+```{r}
+trie <- trie_create()
+```
+
+<mark>
+Pay special attention that: the trie created here is a **mutable** structure.
+All operations mentioned below modifies the trie in place.
+</mark>
+
+Next, you want to add all of your words in yout dictionary into the trie by
+calling `trie_add()` for each of the words:
+
+```{r}
+for (fruit_name in fruit_names_dictionary) {
+  trie_add(trie, fruit_name)
+}
+```
+
+## Search a trie
+
+The most common use case for a trie is to check if a word is in a trie or what
+words start with a prefix. This is implemented in the package as functions
+`trie_contain()` and `trie_find_prefix()`.
+
+If you would like to check if a word is in a trie, you can use `trie_contain()`.
+`trie_contain()` returns a logical value indicating if a word is in a trie,
+like below:
+
+```{r}
+# banana is a word in the original dictionary
+trie_contain(trie, "banana")
+
+# durian is NOT a word in the original dictionary
+trie_contain(trie, "durian")
+```
+
+If you would like to get all words starts with a prefix, you can use
+`trie_find_prefix()`:
+
+```{r}
+# find all words starts with "ap"
+trie_find_prefix(trie, "ap")
+
+# find all words starts with "m"
+trie_find_prefix(trie, "m")
+
+# find all words starts with "dur" (should be empty)
+trie_find_prefix(trie, "dur")
+```
+
+## Delete words in a trie
+
+After the creation of a trie, sometimes you might want to remove a word from
+the trie if it is no longer valid in your context. You can achieve so with
+`trie_delete()`:
+
+```{r}
+# Our trie originally contains "apple", so trie_contain should return TRUE at 
+#   this point
+trie_contain(trie, "apple")
+
+# Now, let's remove "apple" from our trie.
+# Should return true indicating deletion success.
+trie_delete(trie, "apple")
+
+# Now, trie_contain should return FALSE as "apple" has been removed.
+trie_contain(trie, "apple")
+
+# finding words starts with "ap" should no longer gives us "apple" in the result
+trie_find_prefix(trie, "ap")
+```
+
+On the other hand, deletion will fail if you are trying to remove a word not in
+the trie:
+```{r}
+# Should return FALSE indicating deletion failure.
+trie_delete(trie, "durian")
+```

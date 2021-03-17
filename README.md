@@ -16,26 +16,13 @@ DSCI 524 course.
 
 ## Installation
 
-You can install the released version of reasytries from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("reasytries")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the latest version of reasytries from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("UBC-MDS/reasytries")
 ```
-
-## Dependencies
-
-[R 4.0.2](https://www.r-project.org/)
-
-[rlang 0.4.10](https://cran.r-project.org/web/packages/rlang/index.html)
-
 
 ## Overview
 
@@ -49,13 +36,17 @@ word insertion, deletion, and searching in the trie data structure.
 Users can pass any words to be stored for later-on searching or printing
 with certain prefix, and even modify the words in storage.
 
+## Dependencies
+
+[R 4.0.2](https://www.r-project.org/)
+
+[rlang 0.4.10](https://cran.r-project.org/web/packages/rlang/index.html)
+
 ## Features
 
 **Classes**
 
-  - `Class TrieNode`: conceptual class representation of a single node
-    in a trie
-  - `Class Trie`: a conceptual class representation of a trie
+  - `Class Trie`: Conceptual class representation of a trie
 
 **Functions**
 
@@ -81,10 +72,10 @@ with certain prefix, and even modify the words in storage.
 ## R Ecosystem
 
 This `reasytries` package aims to simplify and speed up the process of
-searching through a fixed dictionary. In addition to time complexity
-benefits, a tries data structure also allows to search for given words
-inside the fixed dictionary when given a prefix. Users who are building
-a search/filter bar from a fixed dictionary will find this package
+searching through a dictionary. In addition to time complexity benefits,
+a tries data structure also allows to search for given words inside the
+fixed dictionary when given a prefix. Users who are building a
+search/filter bar from a fixed dictionary will find this package
 useful\! As trie is a famous data structure, there are currently some
 simple trie packages in R such as
 [trie](https://www.rdocumentation.org/packages/triebeard/versions/0.3.0/topics/trie).
