@@ -4,9 +4,7 @@
 # reasytries
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/UBC-MDS/reasytries/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/reasytries/actions)
-[![test-coverage](https://github.com/UBC-MDS/reasytries/workflows/test-coverage/badge.svg)](https://github.com/UBC-MDS/reasytries/actions)
-[![codecov](https://codecov.io/gh/UBC-MDS/reasytries/branch/master/graph/badge.svg?token=6K57F0IDMH)](https://codecov.io/gh/UBC-MDS/reasytries)
+
 <!-- badges: end -->
 
 The reasytries package contains classes and functions that efficiently
@@ -18,7 +16,8 @@ DSCI 524 course.
 
 ## Installation
 
-You can install the latest version of reasytries from
+This package is not yet available on CRAN. Therefore, you will have to
+install the latest version of reasytries from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -43,6 +42,11 @@ with certain prefix, and even modify the words in storage.
 [R 4.0.2](https://www.r-project.org/)
 
 [rlang 0.4.10](https://cran.r-project.org/web/packages/rlang/index.html)
+
+## Documentation
+
+The official documentation can be found
+[here](https://ubc-mds.github.io/reasytries/)
 
 ## Features
 
