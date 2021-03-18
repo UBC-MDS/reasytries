@@ -20,6 +20,20 @@ test_that("trie_add: report error on input word containing characters other than
   expect_error(trie_add(trie, "abc&#^"))
 })
 
+test_that("trie_add: report error when class is not trie", {
+  trie <- tr(list())
+
+  expect_error(trie_add(nottrie, "as"))
+})
+
+test_that("trie_add: test that the function will throw an error when input word is already inside trie dictionary. ", {
+  trie <- tr(list())
+  trie_add(trie, "hi")
+
+  expect_false(trie_add(trie, "hi"))
+
+})
+
 
 test_that("trie_add: correctly add word", {
   trie <- tr(list())

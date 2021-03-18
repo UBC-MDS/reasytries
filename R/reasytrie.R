@@ -155,12 +155,12 @@ trie_contain <- function(trie, word) {
 #' trie <- trie_create()
 #' trie_add(trie, "test")
 trie_add <- function(trie, word_to_add) {
-
   if (!class(trie) == "trie") {
     stop("Input trie must be an instance of the trie class")
   }
 
-  if (!is.character(word_to_add) || !grepl("^[A-Za-z]+$", word_to_add)) {
+  if (!is.character(word_to_add) ||
+      !grepl("^[A-Za-z]+$", word_to_add)) {
     stop("Input word must be a valid string contains letters only")
   }
 
@@ -171,21 +171,38 @@ trie_add <- function(trie, word_to_add) {
     char <- char_list[[i]]
 
 
+    #if last character, then word is complete
+    #if character is a node, then set cur <- character
     if (exists(char, envir = cur@children)) {
       if (i == length(char_list)) {
-        cur@children[[char]] <- TRUE
+        if (cur@children[[char]]@is_complete_word) {
+          return (FALSE)
+        } else {
+          cur@children[[char]]@is_complete_word <- TRUE
+          return (TRUE)
+        }
       }
       cur <- cur@children[[char]]
     }
 
     else {
-
+      #if last character, then word is complete
       if (i == length(char_list)) {
         is_complete_word <- TRUE
-      } else {is_complete_word <- FALSE}
 
-      cur@children[[char]] <- new("trie.node", is_complete_word = is_complete_word, children = rlang::new_environment())
+      } else {
+        is_complete_word <- FALSE
+      }
+
+      #create new node for unseen character
+      cur@children[[char]] <-
+        new(
+          "trie.node",
+          is_complete_word = is_complete_word,
+          children = rlang::new_environment()
+        )
       cur <- cur@children[[char]]
+
     }
 
   }
