@@ -1,3 +1,32 @@
+test_that("trie_find_prefix: all words should be found with prefix that is the root node of the Trie", {
+  trie <- tr(list(
+    b = tn(FALSE, list(
+      e = tn(TRUE, list(
+        e = tn(TRUE, list()))),
+      a = tn(FALSE, list(
+        d = tn(TRUE, list())))
+    ))))
+  #     root
+  #      |
+  #      b
+  #     / \
+  #    a   e
+  #   /     \
+  #  d       e
+
+  prefix_all_found <- trie_find_prefix(trie, "b")
+  # Finding a prefix that's the root node of the Trie, should return:
+  # all complete words in the Trie
+
+  expect_equal(prefix_all_found, c("bad", "be", "bee"))
+  expect_true(exists("b", envir = trie@root@children))
+  expect_true(exists("a", envir = trie@root@children$b@children))
+  expect_true(exists("e", envir = trie@root@children$b@children))
+  expect_true(trie@root@children$b@children$a@children$d@is_complete_word)
+  expect_true(trie@root@children$b@children$e@children$e@is_complete_word)
+})
+
+
 test_that("trie_find_prefix: no words should be found with prefix that doesn't occur in the Trie", {
   trie <- tr(list(
     b = tn(FALSE, list(
