@@ -206,12 +206,7 @@ trie_add <- function(trie, word_to_add) {
     }
 
   }
-
-  if (!cur@is_complete_word) {
-    return(FALSE)
-  } else {
-    return(TRUE)
-  }
+  return (TRUE)
 }
 
 
