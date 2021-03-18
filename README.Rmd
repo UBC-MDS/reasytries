@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
 # reasytries
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/UBC-MDS/reasytries/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/reasytries/actions)
+[![test-coverage](https://github.com/UBC-MDS/reasytries/workflows/test-coverage/badge.svg)](https://github.com/UBC-MDS/reasytries/actions)
+[![codecov](https://codecov.io/gh/UBC-MDS/reasytries/branch/master/graph/badge.svg?token=6K57F0IDMH)](https://codecov.io/gh/UBC-MDS/reasytries)
 <!-- badges: end -->
 
 The reasytries package contains classes and functions that efficiently store and search words passed by the user based on a trie data structure.
@@ -24,12 +27,14 @@ This package was developed as a project for UBC MDS-Vancouver program DSCI 524 c
 
 ## Installation
 
-You can install the latest version of reasytries from [GitHub](https://github.com/) with:
+This package is not yet available on CRAN. Therefore, you will have to install
+the latest version of reasytries from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("UBC-MDS/reasytries")
 ```
+
 ## Overview
 
 Storing and searching words can be expensive in terms of time and
@@ -48,23 +53,44 @@ with certain prefix, and even modify the words in storage.
 
 [rlang 0.4.10](https://cran.r-project.org/web/packages/rlang/index.html)
 
-## Features 
+## Documentation
+
+The official documentation can be found [here](https://ubc-mds.github.io/reasytries/)
+
+## Features
 
 **Classes**
 
   - `Class Trie`: Conceptual class representation of a trie
-    
+
 **Functions**
 
   - `trie_create()` function initializes an empty trie
-  
-  - `trie_add(trie, word_to_add)` function takes in a trie and a word_to_add to store each letter of the new word in the trie data structure.
-  
-  - `trie_contain(trie, word)` function takes in a trie and a word to search through the trie structure and check if the word has been stored in the trie already.
 
-  - `trie_find_prefix(trie, prefix)` function takes in a trie and a prefix to search through the trie structure and return a list of all word stored with the given prefix.
+  - `trie_add(trie, word_to_add)` function takes in a trie and a
+    word\_to\_add to store each letter of the new word in the trie data
+    structure.
 
-  - `trie_delete(trie, word_to_delete)` function takes in a trie and a word_to_delete to remove the letters of the word if they are contained in the trie already. The function returns `FALSE` when the trie does not contain the word_to_delete.
+  - `trie_contain(trie, word)` function takes in a trie and a word to
+    search through the trie structure and check if the word has been
+    stored in the trie already.
 
-## R Ecosystem 
-This `reasytries` package aims to simplify and speed up the process of searching through a dictionary. In addition to time complexity benefits, a tries data structure also allows to search for given words inside the fixed dictionary when given a prefix. Users who are building a search/filter bar from a fixed dictionary will find this package useful! As trie is a famous data structure, there are currently some simple trie packages in R such as  [trie](https://www.rdocumentation.org/packages/triebeard/versions/0.3.0/topics/trie). 
+  - `trie_find_prefix(trie, prefix)` function takes in a trie and a
+    prefix to search through the trie structure and return a list of all
+    word stored with the given prefix.
+
+  - `trie_delete(trie, word_to_delete)` function takes in a trie and a
+    word\_to\_delete to remove the letters of the word if they are
+    contained in the trie already. The function returns `FALSE` when the
+    trie does not contain the word\_to\_delete.
+
+## R Ecosystem
+
+This `reasytries` package aims to simplify and speed up the process of
+searching through a dictionary. In addition to time complexity benefits,
+a tries data structure also allows to search for given words inside the
+fixed dictionary when given a prefix. Users who are building a
+search/filter bar from a fixed dictionary will find this package
+useful\! As trie is a famous data structure, there are currently some
+simple trie packages in R such as
+[trie](https://www.rdocumentation.org/packages/triebeard/versions/0.3.0/topics/trie).
