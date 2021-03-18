@@ -4,7 +4,7 @@
 # reasytries
 
 <!-- badges: start -->
-
+[![codecov](https://codecov.io/gh/UBC-MDS/reasytries/branch/master/graph/badge.svg?token=6K57F0IDMH)](https://codecov.io/gh/UBC-MDS/reasytries)
 <!-- badges: end -->
 
 The reasytries package contains classes and functions that efficiently
