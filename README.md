@@ -4,6 +4,8 @@
 # reasytries
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/UBC-MDS/reasytries/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/reasytries/actions)
+[![test-coverage](https://github.com/UBC-MDS/reasytries/workflows/test-coverage/badge.svg)](https://github.com/UBC-MDS/reasytries/actions)
 [![codecov](https://codecov.io/gh/UBC-MDS/reasytries/branch/master/graph/badge.svg?token=6K57F0IDMH)](https://codecov.io/gh/UBC-MDS/reasytries)
 <!-- badges: end -->
 
