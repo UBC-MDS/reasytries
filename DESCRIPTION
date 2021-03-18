@@ -1,5 +1,5 @@
 Package: reasytries
-Title: reasytries - R package that creates an easy trie data structure!
+Title: Reasytries - R Package that Creates an Easy Trie Data Structure!
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Rachel (Yuting)",
@@ -27,8 +27,8 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
-    testthat,
-    rlang
+    rlang,
+    methods
 Suggests: 
     testthat (>= 3.0.0),
     knitr,
